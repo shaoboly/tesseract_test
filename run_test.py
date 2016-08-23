@@ -2,7 +2,7 @@
 import os
 import copy
 import sys
-from process_pic import two_value_pro
+from process_pic import *
 from chi_code import *
 
 _in_dir = 'F:/tesseract/tu/'
@@ -52,7 +52,14 @@ def standard_pro(item):
 def test():
     #code = sys.getd
     item = 'test7.jpg'
-    two_value_pro(_in_dir+item)
+    pic_name = item.split('.')[0]
+    img =readimg(_in_dir+item)
+    img = face_detect(img)
+    #min1,arg = arg_blue(img)
+    img = color_filt3(img)
+
+    two_value_pro(img,pic_name)
+
     recognize_word('tmp/'+item)
     pro_words = standard_pro(item.split('.')[0])
     out = open('result/'+item.split('.')[0]+'.txt','wb')
